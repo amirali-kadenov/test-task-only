@@ -1,0 +1,41 @@
+@use '../abstracts' as *;
+
+/**
+* Regular font family
+*/
+$font-family:
+  'SF Pro Display', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica',
+  'Arial', sans-serif !default;
+
+/**
+* Regular font size
+*/
+$font-size-root: 16px !default;
+
+/**
+ * Basic typography style for copy text
+ */
+body {
+  font-family: $font-family;
+  font-size: $font-size-root;
+  color: $color-black;
+  letter-spacing: -0.4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+button {
+  padding-inline: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
