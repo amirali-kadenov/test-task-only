@@ -1,0 +1,29 @@
+@use '@/app/styles/abstracts' as *;
+
+.container {
+  position: relative;
+  padding-left: rem(80px);
+  overflow: hidden;
+  border-inline: 1px solid var(--black-blue-10);
+}
+
+.title {
+  position: absolute;
+  top: 169px;
+  left: 0;
+  padding-left: rem(78px);
+  font-size: rem(56px);
+  font-weight: 700;
+  line-height: rem(56px * 1.2);
+  color: var(--black-blue);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    content: '';
+    background: linear-gradient(var(--iris-100), var(--fuschia-100));
+  }
+}
