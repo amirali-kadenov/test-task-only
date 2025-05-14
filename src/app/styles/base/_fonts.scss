@@ -3,16 +3,27 @@
   font-style: normal;
   font-weight: 700;
   src:
-    url('../../fonts/PTSans-Bold.woff2') format('woff2'),
-    url('../../fonts/PTSans-Bold.woff') format('woff');
+    url('/src/app/fonts/PTSans-Bold.woff2') format('woff2'),
+    url('/src/app/fonts/PTSans-Bold.woff') format('woff');
   font-display: swap;
 }
+
 @font-face {
   font-family: 'PT Sans';
   font-style: normal;
   font-weight: 400;
   src:
-    url('../../fonts/PTSans-Regular.woff2') format('woff2'),
-    url('../../fonts/PTSans-Regular.woff') format('woff');
+    url('/src/app/fonts/PTSans-Regular.woff2') format('woff2'),
+    url('/src/app/fonts/PTSans-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('/src/app/fonts/BebasNeue-Regular.woff2') format('woff2'),
+    url('/src/app/fonts/BebasNeue-Regular.woff') format('woff');
   font-display: swap;
 }
