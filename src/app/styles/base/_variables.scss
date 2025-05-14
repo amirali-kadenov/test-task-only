@@ -1,0 +1,35 @@
+@use 'sass:color' as color;
+
+// font-family
+$font-family-pt-sans:
+  'PT Sans', 'Helvetica Neue Light', 'Helvetica Neue', helvetica, arial,
+  sans-serif;
+$font-family-bebas-neue: 'Bebas Neue', $font-family-pt-sans;
+
+// colors
+$black: #000;
+$white: #fff;
+$blue: #3877ee;
+$black-blue: #42567a;
+$black-blue-10: color.adjust($black-blue, $alpha: -0.9);
+$black-blue-50: color.adjust($black-blue, $alpha: 0.5);
+$gray-100: #f4f5f9;
+$fuschia-100: #ef5da8;
+$iris-100: #5d5fef;
+
+:root {
+  // font-family
+  --font-family-pt-sans: #{$font-family-pt-sans};
+  --font-family-bebas-neue: 'Bebas Neue', var(--font-family-pt-sans);
+
+  // colors
+  --black: #{$black};
+  --white: #{$white};
+  --blue: #{$blue};
+  --black-blue: #{$black-blue};
+  --black-blue-10: #{$black-blue-10};
+  --black-blue-50: #{$black-blue-50};
+  --gray-100: #{$gray-100};
+  --fuschia-100: #{$fuschia-100};
+  --iris-100: #{$iris-100};
+}
