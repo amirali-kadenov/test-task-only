@@ -14,6 +14,7 @@ $black-blue: #42567a;
 $black-blue-10: color.adjust($black-blue, $alpha: -0.9);
 $black-blue-50: color.adjust($black-blue, $alpha: 0.5);
 $gray-100: #f4f5f9;
+$gray-200: #c7cdd9;
 $fuschia-100: #ef5da8;
 $iris-100: #5d5fef;
 
@@ -30,6 +31,7 @@ $iris-100: #5d5fef;
   --black-blue-10: #{$black-blue-10};
   --black-blue-50: #{$black-blue-50};
   --gray-100: #{$gray-100};
+  --gray-200: #{$gray-200};
   --fuschia-100: #{$fuschia-100};
   --iris-100: #{$iris-100};
 }

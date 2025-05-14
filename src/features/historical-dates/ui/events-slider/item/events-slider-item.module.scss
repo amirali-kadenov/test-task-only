@@ -1,0 +1,39 @@
+@use '@/app/styles/abstracts' as *;
+
+.year {
+  font-family: var(--font-family-bebas-neue);
+  font-size: rem(25px);
+  line-height: rem(25px * 1.2);
+  color: var(--blue);
+}
+
+.description {
+  display: -webkit-box;
+  margin-top: rem(15px);
+  overflow: hidden;
+  font-size: rem(20px);
+  line-height: rem(30px);
+  color: var(--black-blue);
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
+  @include media-query(max, 480) {
+    -webkit-line-clamp: 4;
+  }
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+div.slide {
+  @include media-query(min, 1280) {
+    width: px-to-dvw(320px);
+
+    &:nth-child(2n) {
+      width: px-to-dvw(400px);
+    }
+  }
+
+  @include media-query(max, 480) {
+    width: rem(166px);
+  }
+}

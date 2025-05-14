@@ -2,7 +2,7 @@ import { rem } from '@/shared/utils/rem'
 import clsx from 'clsx'
 import { CSSProperties, ReactNode } from 'react'
 import styled, { css } from 'styled-components'
-import { POINTS_ROTATE } from '../../lib/constants'
+import { POINTS_ROTATE } from '../../../../lib/constants'
 
 type Props = {
   isActive?: boolean
@@ -10,16 +10,16 @@ type Props = {
   style?: CSSProperties
   onClick?: () => void
   title: string
-  isTitleVisible: boolean | undefined
+  $isTitleVisible: boolean | undefined
 }
 
-export const CirclePoint = ({
+export const EventsCirclePoint = ({
   isActive,
   children,
   style,
   onClick,
   title,
-  isTitleVisible,
+  $isTitleVisible,
 }: Props) => {
   return (
     <Root
@@ -27,7 +27,7 @@ export const CirclePoint = ({
       onClick={onClick}
       className={clsx(isActive && 'active')}
     >
-      <Container isTitleVisible={isTitleVisible}>
+      <Container $isTitleVisible={$isTitleVisible}>
         <RippleWrapper>
           {children}
           <Ripple />
@@ -39,8 +39,8 @@ export const CirclePoint = ({
   )
 }
 
-type RootProps = Omit<Props, 'title' | 'isTitleVisible'>
-type TitleVisibleProp = Pick<Props, 'isTitleVisible'>
+type RootProps = Omit<Props, 'title' | '$isTitleVisible'>
+type TitleVisibleProp = Pick<Props, '$isTitleVisible'>
 
 const Root = styled.div<RootProps>`
   width: ${rem(56)};
@@ -80,7 +80,7 @@ const Container = styled.div<TitleVisibleProp>`
   overflow: hidden;
 
   ${(props) => {
-    if (!props.isTitleVisible) return
+    if (!props.$isTitleVisible) return
 
     return css`
       .active & ~ ${PointTitle} {

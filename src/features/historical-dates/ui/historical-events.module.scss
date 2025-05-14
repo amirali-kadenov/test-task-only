@@ -2,28 +2,52 @@
 
 .container {
   position: relative;
-  padding-left: rem(80px);
+  height: 100dvh;
+  padding: rem(59px) rem(20px) rem(13px);
   overflow: hidden;
-  border-inline: 1px solid var(--black-blue-10);
+
+  @include media-query(min, 480) {
+    height: auto;
+    padding: 0;
+    padding-left: px-to-dvw(80px);
+    border-inline: 1px solid var(--black-blue-10);
+  }
 }
 
 .title {
-  position: absolute;
-  top: 169px;
-  left: 0;
-  padding-left: rem(78px);
   font-size: rem(56px);
   font-weight: 700;
   line-height: rem(56px * 1.2);
   color: var(--black-blue);
 
-  &::before {
+  @include media-query(min, 480) {
     position: absolute;
-    top: 0;
+    top: 169px;
     left: 0;
-    width: 5px;
-    height: 100%;
-    content: '';
-    background: linear-gradient(var(--iris-100), var(--fuschia-100));
+    padding-left: rem(78px);
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      content: '';
+      background: linear-gradient(var(--iris-100), var(--fuschia-100));
+    }
+  }
+
+  @include media-query(max, 1280) {
+    top: px-to-dvw(169px);
+    padding-left: px-to-dvw(78px);
+  }
+
+  @include media-query(max, 768) {
+    font-size: px-to-dvw(120px);
+    line-height: px-to-dvw(120px * 1.2);
+  }
+
+  @include media-query(max, 480) {
+    padding-left: 0;
   }
 }

@@ -4,7 +4,10 @@
 @use 'sass:math';
 @use 'sass:meta';
 
-// Converts px to rem
+/// Converts px to rem
+/// @param {Number} $value - The pixel value to convert
+/// @param {Number} $base-value: 16px - The base value for conversion
+/// @return {Number} The value in rem
 @function rem($value, $base-value: 16px) {
   // If you haven't set the root font size, then it is the browser default, which is often 16px.
   @if not $base-value {
@@ -45,13 +48,35 @@
   @return $value;
 }
 
-// Remove the unit of a length
-// @param {Number} $number - Number to remove unit from
-// @return {Number} - Unitless number
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
 @function strip-unit($number) {
   @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
     @return math.div($number, ($number * 0 + 1));
   }
 
   @return $number;
+}
+
+/// Converts 'px' string values to 'vw'
+/// @param {String | Number} $value - The pixel value as string (e.g. '350px') or number
+/// @param {Number} $base: 1920 - The base width for conversion
+/// @return {Number} The value in vw
+@function px-to-dvw($value, $base: 1920) {
+  // If string like '350px', strip 'px' and convert to number
+  @if meta.type-of($value) == 'string' {
+    $value: string.slice($value, 1, string.length($value) - 2); // remove 'px'
+    $value: $value * 1; // cast to number
+  }
+
+  // Remove px unit if it's a number with unit
+  @if math.unit($value) == 'px' {
+    $value: strip-unit($value);
+  }
+
+  $vw: calc(($value / $base) * 100);
+  $vw: calc(round($vw * 100) / 100); // round to 2 decimal places
+
+  @return $vw + vw;
 }

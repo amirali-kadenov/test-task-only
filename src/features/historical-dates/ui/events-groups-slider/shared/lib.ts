@@ -20,3 +20,5 @@ export const getPointsCoordinates = (
 
   return result
 }
+
+export const resolveYear = (year: string) => Math.floor(Number(year))

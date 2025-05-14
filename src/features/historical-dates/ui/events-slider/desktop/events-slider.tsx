@@ -1,23 +1,23 @@
 import clsx from 'clsx'
-import gsap from 'gsap'
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import { Navigation } from 'swiper/modules'
-import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from 'swiper/react'
-import {
-  SLIDE_FINAL_ANIMATION,
-  SLIDE_STARTING_ANIMATION_IN,
-  SWIPER_SLIDE_CLASS_NAME,
-} from '../../lib/constants'
-import { HistoricalEventsGroup } from '../../model/types'
-import { NavigationButton } from '../navigation-button/navigation-button'
+import { Swiper, SwiperClass, SwiperRef } from 'swiper/react'
+
+import { HistoricalEventsGroup } from '../../../model/types'
+import { NavigationButton } from '../../navigation-button/navigation-button'
+import { EventsSliderItem } from '../item/events-slider-item'
+import { useEventsSliderAnimation } from '../model'
 import cls from './events-slider.module.scss'
 
-type Props = {
+export type EventsSliderProps = {
   eventsGroup: HistoricalEventsGroup
   containerRef: RefObject<SwiperRef>
 }
 
-export const EventsSlider = ({ eventsGroup, containerRef }: Props) => {
+export const EventsSlider = ({
+  eventsGroup,
+  containerRef,
+}: EventsSliderProps) => {
   const swiperRef = useRef<SwiperClass | null>(null)
   const prevRef = useRef(null)
   const nextRef = useRef(null)
@@ -25,17 +25,10 @@ export const EventsSlider = ({ eventsGroup, containerRef }: Props) => {
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        SWIPER_SLIDE_CLASS_NAME,
-        SLIDE_STARTING_ANIMATION_IN,
-        SLIDE_FINAL_ANIMATION
-      )
-    }, containerRef)
-
-    return () => ctx.clear()
-  }, [eventsGroup])
+  useEventsSliderAnimation({
+    containerRef,
+    eventsGroup,
+  })
 
   return (
     <div className={cls.wrapper}>
@@ -43,9 +36,18 @@ export const EventsSlider = ({ eventsGroup, containerRef }: Props) => {
         ref={containerRef}
         className={cls.slider}
         modules={[Navigation]}
-        spaceBetween={80}
-        slidesPerView={3}
         grabCursor
+        spaceBetween={40}
+        slidesPerView={'auto'}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+          },
+          1600: {
+            spaceBetween: 80,
+            slidesPerView: 'auto',
+          },
+        }}
         navigation={{
           prevEl: prevRef.current,
           nextEl: nextRef.current,
@@ -61,14 +63,11 @@ export const EventsSlider = ({ eventsGroup, containerRef }: Props) => {
         }}
       >
         {eventsGroup.events.map(({ year, description }) => (
-          <SwiperSlide key={year} title={description}>
-            <h3 className={cls.year}>{year}</h3>
-            <p className={cls.description}>{description}</p>
-          </SwiperSlide>
+          <EventsSliderItem key={year} year={year} description={description} />
         ))}
       </Swiper>
 
-      <div className={cls.pagination}>
+      <div className={cls.navigation}>
         <div className={clsx(cls.buttonWrapper, atStart && cls.hidden)}>
           <NavigationButton
             ref={prevRef}

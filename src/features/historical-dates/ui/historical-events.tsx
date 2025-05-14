@@ -1,3 +1,4 @@
+import { useIsMobile } from '@/shared/hooks/use-is-mobile'
 import gsap from 'gsap'
 import { useRef, useState } from 'react'
 import { SwiperRef } from 'swiper/react'
@@ -7,8 +8,10 @@ import {
   SWIPER_SLIDE_CLASS_NAME,
 } from '../lib/constants'
 import { HistoricalEventsGroup } from '../model/types'
-import { EventsGroupsSlider } from './events-groups-slider/events-groups-slider'
-import { EventsSlider } from './events-slider/events-slider'
+import { EventsGroupsSlider } from './events-groups-slider/desktop/events-groups-slider'
+import { EventsGroupsSliderMobile } from './events-groups-slider/mobile/events-groups-slider-mobile'
+import { EventsSlider } from './events-slider/desktop/events-slider'
+import { EventsSliderMobile } from './events-slider/mobile/events-slider-mobile'
 import cls from './historical-events.module.scss'
 
 type Props = {
@@ -19,6 +22,8 @@ export const HistoricalEvents = ({ eventGroups }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const eventsSliderRef = useRef<SwiperRef>(null)
+
+  const isMobile = useIsMobile()
 
   const animateEventsSliderOut = () => {
     gsap.context(() => {
@@ -34,23 +39,42 @@ export const HistoricalEvents = ({ eventGroups }: Props) => {
     setActiveIndex(newIndex)
   }
 
+  const activeGroup = eventGroups[activeIndex]
+
   return (
     <div className={cls.container}>
       <h1 className={cls.title}>
         Исторические <br /> даты
       </h1>
 
-      <EventsGroupsSlider
-        initialActiveIndex={activeIndex}
-        eventsGroups={eventGroups}
-        beforeGroupChange={animateEventsSliderOut}
-        afterGroupChange={setNewActiveIndex}
-      />
+      {isMobile && (
+        <EventsGroupsSliderMobile
+          initialActiveIndex={activeIndex}
+          eventsGroups={eventGroups}
+          beforeGroupChange={animateEventsSliderOut}
+          afterGroupChange={setNewActiveIndex}
+        >
+          <EventsSliderMobile
+            eventsGroup={activeGroup}
+            containerRef={eventsSliderRef}
+          />
+        </EventsGroupsSliderMobile>
+      )}
 
-      <EventsSlider
-        eventsGroup={eventGroups[activeIndex]}
-        containerRef={eventsSliderRef}
-      />
+      {!isMobile && (
+        <>
+          <EventsGroupsSlider
+            initialActiveIndex={activeIndex}
+            eventsGroups={eventGroups}
+            beforeGroupChange={animateEventsSliderOut}
+            afterGroupChange={setNewActiveIndex}
+          />
+          <EventsSlider
+            eventsGroup={activeGroup}
+            containerRef={eventsSliderRef}
+          />
+        </>
+      )}
     </div>
   )
 }

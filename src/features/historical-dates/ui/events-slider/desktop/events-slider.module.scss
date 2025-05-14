@@ -3,14 +3,29 @@
 div.slider {
   position: relative;
   padding-bottom: rem(20px);
-  margin: rem(56px) rem(160px) rem(104px) 0;
+  margin: px-to-dvw(56px) px-to-dvw(160px) px-to-dvw(104px) 0;
+
+  @include media-query(max, 1280) {
+    margin-right: px-to-dvw(104px);
+  }
+
+  @include media-query(max, 1024) {
+    margin-right: px-to-dvw(260px);
+    margin-left: px-to-dvw(160px);
+  }
+
+  @include media-query(max, 768) {
+    margin-inline: rem(80px);
+    margin-top: rem(40px);
+    margin-bottom: 0;
+  }
 }
 
 .wrapper {
   position: relative;
 }
 
-.pagination {
+.navigation {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -19,6 +34,10 @@ div.slider {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+
+  @include media-query(max, 1024) {
+    right: px-to-dvw(160px);
+  }
 }
 
 .button {
@@ -39,28 +58,17 @@ div.slider {
   padding: rem(20px);
   background-color: var(--gray-100);
   transition: opacity 0.2s;
+
+  @include media-query(max, 1280) {
+    padding: px-to-dvw(20px);
+  }
 }
 
 .hidden {
   pointer-events: none;
-  opacity: 0;
-}
+  opacity: 0.5;
 
-.year {
-  font-family: var(--font-family-bebas-neue);
-  font-size: rem(25px);
-  line-height: rem(25px * 1.2);
-  color: var(--blue);
-}
-
-.description {
-  display: -webkit-box;
-  margin-top: rem(15px);
-  overflow: hidden;
-  font-size: rem(20px);
-  line-height: rem(30px);
-  color: var(--black-blue);
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  @include media-query(min, 1024) {
+    opacity: 0;
+  }
 }

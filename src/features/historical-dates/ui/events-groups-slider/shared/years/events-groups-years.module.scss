@@ -1,0 +1,39 @@
+@use '@/app/styles/abstracts' as *;
+
+.years {
+  font-size: rem(200px);
+  line-height: rem(160px);
+  letter-spacing: rem(-4px);
+
+  @include media-query(max, 1280) {
+    font-size: rem(160px);
+    line-height: rem(120px);
+  }
+
+  @include media-query(max, 1024) {
+    font-size: px-to-dvw(240px);
+    line-height: px-to-dvw(180px);
+  }
+
+  @include media-query(max, 768) {
+    font-size: px-to-dvw(300px);
+    line-height: px-to-dvw(230px);
+  }
+
+  @include media-query(min, 480) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.start {
+  font-weight: 700;
+  color: var(--iris-100);
+}
+
+.end {
+  font-weight: 700;
+  color: var(--fuschia-100);
+}

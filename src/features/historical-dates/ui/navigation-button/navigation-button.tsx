@@ -1,4 +1,5 @@
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-left.svg'
+import { rem } from '@/shared/utils/rem'
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 import cls from './navigation-button.module.scss'
@@ -20,7 +21,6 @@ export const NavigationButton = forwardRef<HTMLButtonElement, Props>(
     )
   }
 )
-
 NavigationButton.displayName = 'NavigationButton'
 
 type StylesProps = Pick<Props, 'size' | '$withoutBorder'>
@@ -33,6 +33,7 @@ const NavigationButtonStyles = styled.button<StylesProps>`
   align-items: center;
   color: var(--black-blue);
   transition: background-color 200ms;
+  background-color: var(--gray-100);
 
   &:hover {
     background-color: var(--white);
@@ -55,4 +56,13 @@ const NavigationButtonStyles = styled.button<StylesProps>`
         : `1px solid var(--black-blue-50)`};
     `
   }}
+
+  @media screen and (max-width: 480px) {
+    min-width: ${rem(25)};
+    height: ${rem(25)};
+
+    svg {
+      scale: 0.7;
+    }
+  }
 `

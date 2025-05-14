@@ -1,0 +1,30 @@
+@use '@/app/styles/abstracts' as *;
+
+.circle {
+  position: relative;
+  z-index: 10;
+  width: rem(530px);
+  height: rem(530px);
+  border: 1px solid var(--black-blue-10);
+  border-radius: 999px;
+  transform: rotate(var(--rotate));
+
+  @include media-query(max, 768) {
+    width: rem(380px);
+    height: rem(380px);
+  }
+}
+
+.points {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.pointWrapper {
+  position: relative;
+}
+
+.pointTitle {
+  position: absolute;
+}

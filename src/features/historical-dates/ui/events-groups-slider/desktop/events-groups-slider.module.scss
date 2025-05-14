@@ -1,0 +1,35 @@
+@use '@/app/styles/abstracts' as *;
+
+.container {
+  @include flex-center;
+
+  margin-top: px-to-dvw(215px);
+}
+
+.wrapper {
+  position: relative;
+  margin-left: px-to-dvw(-80px);
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    background-color: var(--black-blue-10);
+  }
+
+  &::before {
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 200dvh;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    top: 50%;
+    left: 0;
+    width: 200dvw;
+    height: 1px;
+    transform: translateX(-50%);
+  }
+}

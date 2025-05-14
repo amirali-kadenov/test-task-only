@@ -1,6 +1,11 @@
 @use '@/app/styles/abstracts' as *;
 
 .app {
-  margin-right: rem(160px);
-  margin-left: rem(320px);
+  margin-right: px-to-dvw(160px);
+  margin-left: px-to-dvw(320px);
+
+  @include media-query(max, 1280) {
+    margin-right: px-to-dvw(60px);
+    margin-left: px-to-dvw(60px);
+  }
 }
