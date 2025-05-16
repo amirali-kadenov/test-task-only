@@ -6,7 +6,7 @@ import styles from './app.module.scss'
 export const App = () => {
   return (
     <main className={styles.app}>
-      <HistoricalEvents eventGroups={EVENTS_GROUPS} />
+      <HistoricalEvents eventsGroups={EVENTS_GROUPS} />
     </main>
   )
 }

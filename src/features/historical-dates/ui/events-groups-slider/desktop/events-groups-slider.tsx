@@ -20,11 +20,10 @@ export const EventsGroupsSlider = (props: EventsGroupsSliderProps) => {
   const startYearRef = useRef<HTMLDivElement>(null)
   const endYearRef = useRef<HTMLDivElement>(null)
 
-  const { pointsCoordinates, activeIndex, isTransitioning, handleGroupChange } =
+  const { points, activeIndex, isTransitioning, handleGroupChange } =
     useEventsGroupsSlider(props, [circleRef, startYearRef, endYearRef])
 
   const activeGroup = eventsGroups[activeIndex]
-
   const startYear = activeGroup.events[0].year
   const endYear = activeGroup.events[activeGroup.events.length - 1].year
 
@@ -33,8 +32,8 @@ export const EventsGroupsSlider = (props: EventsGroupsSliderProps) => {
       <div className={cls.container}>
         <div className={cls.wrapper}>
           <EventsGroupsCircle
-            circleRef={circleRef}
-            pointsCoordinates={pointsCoordinates}
+            ref={circleRef}
+            points={points}
             activeIndex={activeIndex}
             handleGroupChange={handleGroupChange}
             eventsGroups={eventsGroups}

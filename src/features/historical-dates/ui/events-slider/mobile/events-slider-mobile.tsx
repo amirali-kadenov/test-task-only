@@ -2,7 +2,7 @@ import { FreeMode } from 'swiper/modules'
 import { Swiper } from 'swiper/react'
 import { EventsSliderProps } from '../desktop/events-slider'
 import { EventsSliderItem } from '../item/events-slider-item'
-import { useEventsSliderAnimation } from '../model'
+import { useEventsSliderAnimation } from '../lib'
 
 type Props = EventsSliderProps
 

@@ -10,7 +10,8 @@ type Props = {
   style?: CSSProperties
   onClick?: () => void
   title: string
-  $isTitleVisible: boolean | undefined
+  isTitleShown?: boolean
+  disabled?: boolean
 }
 
 export const EventsCirclePoint = ({
@@ -19,7 +20,8 @@ export const EventsCirclePoint = ({
   style,
   onClick,
   title,
-  $isTitleVisible,
+  isTitleShown,
+  disabled,
 }: Props) => {
   return (
     <Root
@@ -27,11 +29,11 @@ export const EventsCirclePoint = ({
       onClick={onClick}
       className={clsx(isActive && 'active')}
     >
-      <Container $isTitleVisible={$isTitleVisible}>
-        <RippleWrapper>
+      <Container $isTitleShown={isTitleShown}>
+        <Button disabled={disabled}>
           {children}
           <Ripple />
-        </RippleWrapper>
+        </Button>
       </Container>
 
       <PointTitle>{title}</PointTitle>
@@ -39,8 +41,10 @@ export const EventsCirclePoint = ({
   )
 }
 
-type RootProps = Omit<Props, 'title' | '$isTitleVisible'>
-type TitleVisibleProp = Pick<Props, '$isTitleVisible'>
+type RootProps = Omit<Props, 'title' | 'isTitleShown'>
+type TitleVisibleProp = {
+  $isTitleShown?: boolean
+}
 
 const Root = styled.div<RootProps>`
   width: ${rem(56)};
@@ -50,7 +54,6 @@ const Root = styled.div<RootProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 
   --size: ${rem(6)};
   --ripple-bg: var(--black-blue);
@@ -80,7 +83,7 @@ const Container = styled.div<TitleVisibleProp>`
   overflow: hidden;
 
   ${(props) => {
-    if (!props.$isTitleVisible) return
+    if (!props.$isTitleShown) return
 
     return css`
       .active & ~ ${PointTitle} {
@@ -91,7 +94,7 @@ const Container = styled.div<TitleVisibleProp>`
   }}
 `
 
-const RippleWrapper = styled.div`
+const Button = styled.button`
   position: relative;
   width: var(--size);
   height: var(--size);
@@ -103,6 +106,10 @@ const RippleWrapper = styled.div`
   border-radius: inherit;
   font-size: ${rem(20)};
   line-height: ${rem(30)};
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
 `
 
 const Ripple = styled.div`

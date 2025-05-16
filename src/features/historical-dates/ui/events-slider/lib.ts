@@ -5,7 +5,7 @@ import { SwiperRef } from 'swiper/react'
 import {
   SLIDE_FINAL_ANIMATION,
   SLIDE_STARTING_ANIMATION_IN,
-  SWIPER_SLIDE_CLASS_NAME,
+  SLIDE_CLASS_NAME,
 } from '../../lib/constants'
 import { HistoricalEventsGroup } from '../../model/types'
 
@@ -21,7 +21,7 @@ export const useEventsSliderAnimation = ({
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        SWIPER_SLIDE_CLASS_NAME,
+        SLIDE_CLASS_NAME,
         SLIDE_STARTING_ANIMATION_IN,
         SLIDE_FINAL_ANIMATION
       )

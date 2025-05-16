@@ -1,24 +1,34 @@
-export const getPointsCoordinates = (
-  pointsCount: number,
-  circleWidth: number
-) => {
-  const radius = circleWidth / 2
-  const centerX = circleWidth / 2
-  const centerY = circleWidth / 2
+export type Point = {
+  x: number
+  y: number
+}
 
-  const angleOffset = -(Math.PI / pointsCount) // Смещение вправо
-  const result = []
+/**
+ * Calculates coordinates for evenly spaced points around a circle.
+ *
+ * @param pointsCount - Total number of points to place around the circle.
+ * @param circleWidth - The width and height of the circle (assumes a perfect circle in a square space).
+ * @returns Array of coordinate objects { x, y } for each point.
+ */
+export const getPoints = (pointsCount: number, circleWidth: number) => {
+  const radius = circleWidth / 2 // Radius of the circle
+  const center = circleWidth / 2 // Center point (x and y) of the circle
+  const angleOffset = -(Math.PI / pointsCount) // Optional small rotation clockwise for visual balance
+
+  const points: Point[] = []
 
   for (let i = 0; i < pointsCount; i++) {
-    // Учитываем смещение угла для сдвига первой точки
-    const angle = Math.PI / 2 - ((2 * Math.PI) / pointsCount) * i + angleOffset
-    const x = centerX + radius * Math.cos(angle)
-    const y = centerY - radius * Math.sin(angle) // инверсия Y оси для HTML координат
+    const baseAngle = Math.PI / 2 // Starting angle (top of the circle)
+    const pointAngle = ((2 * Math.PI) / pointsCount) * i // Angle for this point
+    const angle = baseAngle - pointAngle + angleOffset // Final angle with offset
 
-    result.push({ x, y })
+    const x = center + radius * Math.cos(angle)
+    const y = center - radius * Math.sin(angle) // Inverted Y because screen coordinates grow downward
+
+    points.push({ x, y }) // Store point
   }
 
-  return result
+  return points
 }
 
 export const resolveYear = (year: string) => Math.floor(Number(year))

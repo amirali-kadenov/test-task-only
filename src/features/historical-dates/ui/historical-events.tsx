@@ -5,7 +5,7 @@ import { SwiperRef } from 'swiper/react'
 import {
   SLIDE_FINAL_ANIMATION,
   SLIDE_STARTING_ANIMATION_OUT,
-  SWIPER_SLIDE_CLASS_NAME,
+  SLIDE_CLASS_NAME,
 } from '../lib/constants'
 import { HistoricalEventsGroup } from '../model/types'
 import { EventsGroupsSlider } from './events-groups-slider/desktop/events-groups-slider'
@@ -15,10 +15,10 @@ import { EventsSliderMobile } from './events-slider/mobile/events-slider-mobile'
 import cls from './historical-events.module.scss'
 
 type Props = {
-  eventGroups: HistoricalEventsGroup[]
+  eventsGroups: HistoricalEventsGroup[]
 }
 
-export const HistoricalEvents = ({ eventGroups }: Props) => {
+export const HistoricalEvents = ({ eventsGroups }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const eventsSliderRef = useRef<SwiperRef>(null)
@@ -28,7 +28,7 @@ export const HistoricalEvents = ({ eventGroups }: Props) => {
   const animateEventsSliderOut = () => {
     gsap.context(() => {
       gsap.fromTo(
-        SWIPER_SLIDE_CLASS_NAME,
+        SLIDE_CLASS_NAME,
         SLIDE_FINAL_ANIMATION,
         SLIDE_STARTING_ANIMATION_OUT
       )
@@ -39,7 +39,7 @@ export const HistoricalEvents = ({ eventGroups }: Props) => {
     setActiveIndex(newIndex)
   }
 
-  const activeGroup = eventGroups[activeIndex]
+  const activeGroup = eventsGroups[activeIndex]
 
   return (
     <div className={cls.container}>
@@ -50,7 +50,7 @@ export const HistoricalEvents = ({ eventGroups }: Props) => {
       {isMobile && (
         <EventsGroupsSliderMobile
           initialActiveIndex={activeIndex}
-          eventsGroups={eventGroups}
+          eventsGroups={eventsGroups}
           beforeGroupChange={animateEventsSliderOut}
           afterGroupChange={setNewActiveIndex}
         >
@@ -65,7 +65,7 @@ export const HistoricalEvents = ({ eventGroups }: Props) => {
         <>
           <EventsGroupsSlider
             initialActiveIndex={activeIndex}
-            eventsGroups={eventGroups}
+            eventsGroups={eventsGroups}
             beforeGroupChange={animateEventsSliderOut}
             afterGroupChange={setNewActiveIndex}
           />

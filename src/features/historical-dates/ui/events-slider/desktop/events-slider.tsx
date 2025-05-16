@@ -6,7 +6,7 @@ import { Swiper, SwiperClass, SwiperRef } from 'swiper/react'
 import { HistoricalEventsGroup } from '../../../model/types'
 import { NavigationButton } from '../../navigation-button/navigation-button'
 import { EventsSliderItem } from '../item/events-slider-item'
-import { useEventsSliderAnimation } from '../model'
+import { useEventsSliderAnimation } from '../lib'
 import cls from './events-slider.module.scss'
 
 export type EventsSliderProps = {

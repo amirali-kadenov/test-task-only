@@ -15,7 +15,7 @@ export const SLIDE_FINAL_ANIMATION = {
   duration: 0.4,
 }
 
-export const SWIPER_SLIDE_CLASS_NAME = '.swiper-slide'
+export const SLIDE_CLASS_NAME = '.swiper-slide'
 
 export const ROTATE = '--rotate'
 export const POINTS_ROTATE = '--points-rotate'
